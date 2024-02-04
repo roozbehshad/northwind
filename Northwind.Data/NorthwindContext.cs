@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Northwind.Models.Domain;
 
 namespace Northwind.Data
 {
@@ -37,60 +38,66 @@ namespace Northwind.Data
         {
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.HasIndex(e => e.CategoryName)
-                    .HasName("CategoryName");
+                entity.HasIndex(e => e.Name)
+                    .HasDatabaseName("CategoryName");
+
+                entity.Property(nameof(Category.Id)).HasColumnName("CategoryID");
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasIndex(e => e.City)
-                    .HasName("City");
+                    .HasDatabaseName("City");
 
                 entity.HasIndex(e => e.CompanyName)
-                    .HasName("CompanyName");
+                    .HasDatabaseName("CompanyName");
 
                 entity.HasIndex(e => e.PostalCode)
-                    .HasName("PostalCode");
+                    .HasDatabaseName("PostalCode");
 
                 entity.HasIndex(e => e.Region)
-                    .HasName("Region");
+                    .HasDatabaseName("Region");
 
-                entity.Property(e => e.CustomerId).IsFixedLength();
+                entity.Property(e => e.Code).IsFixedLength();
+
+                entity.Ignore(nameof(Customer.Id));
             });
 
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasIndex(e => e.LastName)
-                    .HasName("LastName");
+                    .HasDatabaseName("LastName");
 
                 entity.HasIndex(e => e.PostalCode)
-                    .HasName("PostalCode");
+                    .HasDatabaseName("PostalCode");
 
-                entity.HasOne(d => d.ReportsToNavigation)
-                    .WithMany(p => p.InverseReportsToNavigation)
-                    .HasForeignKey(d => d.ReportsTo)
+                entity.HasOne(d => d.ReportsTo)
+                    .WithMany(p => p.DirectReports)
+                    .HasForeignKey(d => d.ReportsToId)
                     .HasConstraintName("FK_Employees_Employees");
+
+                entity.Property(nameof(Employee.Id)).HasColumnName("EmployeeID");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.HasIndex(e => e.CustomerId)
-                    .HasName("CustomersOrders");
+                    .HasDatabaseName("CustomersOrders");
 
                 entity.HasIndex(e => e.EmployeeId)
-                    .HasName("EmployeesOrders");
+                    .HasDatabaseName("EmployeesOrders");
 
                 entity.HasIndex(e => e.OrderDate)
-                    .HasName("OrderDate");
+                    .HasDatabaseName("OrderDate");
 
                 entity.HasIndex(e => e.ShipPostalCode)
-                    .HasName("ShipPostalCode");
+                    .HasDatabaseName("ShipPostalCode");
 
-                entity.HasIndex(e => e.ShipVia)
-                    .HasName("ShippersOrders");
+                entity.HasIndex(e => e.ShipperId)
+                    .HasDatabaseName("ShippersOrders");
 
                 entity.HasIndex(e => e.ShippedDate)
-                    .HasName("ShippedDate");
+                    .HasDatabaseName("ShippedDate");
 
                 entity.Property(e => e.CustomerId).IsFixedLength();
 
@@ -106,10 +113,12 @@ namespace Northwind.Data
                     .HasForeignKey(d => d.EmployeeId)
                     .HasConstraintName("FK_Orders_Employees");
 
-                entity.HasOne(d => d.ShipViaNavigation)
+                entity.HasOne(d => d.ShipVia)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.ShipVia)
+                    .HasForeignKey(d => d.ShipperId)
                     .HasConstraintName("FK_Orders_Shippers");
+
+                entity.Property(nameof(Order.Id)).HasColumnName("OrderID");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -118,10 +127,10 @@ namespace Northwind.Data
                     .HasName("PK_Order_Details");
 
                 entity.HasIndex(e => e.OrderId)
-                    .HasName("OrdersOrder_Details");
+                    .HasDatabaseName("OrdersOrder_Details");
 
                 entity.HasIndex(e => e.ProductId)
-                    .HasName("ProductsOrder_Details");
+                    .HasDatabaseName("ProductsOrder_Details");
 
                 entity.Property(e => e.Quantity).HasDefaultValueSql("((1))");
 
@@ -136,18 +145,20 @@ namespace Northwind.Data
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Details_Products");
+
+                entity.Ignore(nameof(OrderDetail.Id));
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasIndex(e => e.CategoryId)
-                    .HasName("CategoryID");
+                    .HasDatabaseName("CategoryID");
 
-                entity.HasIndex(e => e.ProductName)
-                    .HasName("ProductName");
+                entity.HasIndex(e => e.Name)
+                    .HasDatabaseName("ProductName");
 
                 entity.HasIndex(e => e.SupplierId)
-                    .HasName("SuppliersProducts");
+                    .HasDatabaseName("SuppliersProducts");
 
                 entity.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
 
@@ -166,15 +177,23 @@ namespace Northwind.Data
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.SupplierId)
                     .HasConstraintName("FK_Products_Suppliers");
+
+                entity.Property(nameof(Product.Id)).HasColumnName("ProductID");
             });
 
             modelBuilder.Entity<Supplier>(entity =>
             {
                 entity.HasIndex(e => e.CompanyName)
-                    .HasName("CompanyName");
+                    .HasDatabaseName("CompanyName");
 
                 entity.HasIndex(e => e.PostalCode)
-                    .HasName("PostalCode");
+                    .HasDatabaseName("PostalCode");
+
+                entity.Property(nameof(Supplier.Id)).HasColumnName("SupplierID");
+            });
+
+            modelBuilder.Entity<Shipper>(entity => {
+                entity.Property(nameof(Shipper.Id)).HasColumnName("ShipperID");
             });
 
             OnModelCreatingPartial(modelBuilder);

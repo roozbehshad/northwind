@@ -1,25 +1,26 @@
-﻿using System;
+﻿using Northwind.Models.Domain.Base;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Northwind.Data
-{
-    public partial class Category
-    {
-        public Category()
-        {
+namespace Northwind.Models.Domain {
+    public partial class Category : EntityBase {
+        public Category() {
             Products = new HashSet<Product>();
         }
 
-        [Key]
-        [Column("CategoryID")]
-        public int CategoryId { get; set; }
+        public static Category CreateInstance(State state = State.Added) {
+            return CreateInstance<Category>(state);
+        }
+
         [Required]
         [StringLength(15)]
-        public string CategoryName { get; set; }
+        [Column("CategoryName")]
+        public string Name { get; set; }
+
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
+
         [Column(TypeName = "image")]
         public byte[] Picture { get; set; }
 
