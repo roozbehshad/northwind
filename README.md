@@ -20,3 +20,4 @@ For ease of finding and quick access to the videos, I have included their links 
 | Video title                                                                                                    | Date published |
 | -------------------------------------------------------------------------------------------------------------- | -------------- |
 | [Reverse Engineering Tutorial: Using EF Core Code First with Existing Databases](https://youtu.be/5AqPo04YhvM) | Nov 25, 2020   |
+| [Multi-Layered (N-Tier) Software Architectural Pattern Tutorial](https://youtu.be/ThxKMLjYUU4)                 | Jan 02, 2021   |
