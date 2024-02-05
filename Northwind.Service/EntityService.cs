@@ -33,7 +33,8 @@ namespace Northwind.Service {
             throw new NotImplementedException();
         }
 
-        public async Task<TEntity> SaveAsync(TEntity entityToSave) {
+        public async Task<int> SaveAsync(TEntity entityToSave) {
+            int numOfEntriesWritten = 0;
             ////Validate the object in case of update or insert
             //if (entityToSave.State == State.Added || entityToSave.State == State.Modified) {
             //    var result = entityToSave.Validate();
@@ -47,11 +48,11 @@ namespace Northwind.Service {
                 _dbSet.Update(entityToSave);
 
             if (entityToSave.State != State.Unchanged) {
-                await _context.SaveChangesAsync(); //should be wrapped in a try-catch block in case of exceptions
+                numOfEntriesWritten = await _context.SaveChangesAsync(); //should be wrapped in a try-catch block in case of exceptions
                 entityToSave.State = State.Unchanged;
             }
 
-            return entityToSave;
+            return numOfEntriesWritten;
         }
 
         public bool Exists(int id) {

@@ -13,7 +13,7 @@ namespace Northwind.Service {
 
         Task<IEnumerable<TEntity>> GetByParamAsync(/*DataSourceParameter dataSourceParam*/);
 
-        Task<TEntity> SaveAsync(TEntity entityToSave);
+        Task<int> SaveAsync(TEntity entityToSave);
 
         bool Exists(int id);
 
