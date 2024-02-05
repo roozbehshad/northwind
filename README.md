@@ -21,4 +21,5 @@ For ease of finding and quick access to the videos, I have included their links 
 | -------------------------------------------------------------------------------------------------------------- | -------------- |
 | [Reverse Engineering Tutorial: Using EF Core Code First with Existing Databases](https://youtu.be/5AqPo04YhvM) | Nov 25, 2020   |
 | [Multi-Layered (N-Tier) Software Architectural Pattern Tutorial](https://youtu.be/ThxKMLjYUU4)                 | Jan 02, 2021   |
-| [Domain Model Pattern Tutorial](https://youtu.be/ISskkiAh_G8)									                 | Mar 01, 2021   |
+| [Domain Model Pattern Tutorial](https://youtu.be/ISskkiAh_G8)                                                  | Mar 01, 2021   |
+| [Service Layer Pattern Tutorial](https://youtu.be/nyiMTsVMfyU)                                                 | Apr 24, 2021   |
