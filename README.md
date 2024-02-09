@@ -24,3 +24,4 @@ For ease of finding and quick access to the videos, I have included their links 
 | [Domain Model Pattern Tutorial](https://youtu.be/ISskkiAh_G8)                                                  | Mar 01, 2021   |
 | [Service Layer Pattern Tutorial](https://youtu.be/nyiMTsVMfyU)                                                 | Apr 24, 2021   |
 | [An Adjustment to the Service Layer](https://youtu.be/D__uFkiwZFQ)                                             | Aug 20, 2021   |
+| [REST API Tutorial](https://youtu.be/Wxb3eawo7fo)                                                              | Aug 20, 2021   |
