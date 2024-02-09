@@ -61,7 +61,12 @@ namespace Northwind.Service {
 
         public bool Exists(params object[] keys) {
             TEntity entity = _dbSet.Find(keys);
-            return (entity != null);
+            if (entity != null) {
+                _context.Entry(entity).State = EntityState.Detached;
+                return true;
+            }
+
+            return false;
         }
 
         #region IDisposable Support

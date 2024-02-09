@@ -25,3 +25,4 @@ For ease of finding and quick access to the videos, I have included their links 
 | [Service Layer Pattern Tutorial](https://youtu.be/nyiMTsVMfyU)                                                 | Apr 24, 2021   |
 | [An Adjustment to the Service Layer](https://youtu.be/D__uFkiwZFQ)                                             | Aug 20, 2021   |
 | [REST API Tutorial](https://youtu.be/Wxb3eawo7fo)                                                              | Aug 20, 2021   |
+| [A Patch on the Service Layer](https://youtu.be/gOCqAmbr25s)                                                   | Nov 06, 2021   |
