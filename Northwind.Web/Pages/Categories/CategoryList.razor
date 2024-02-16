@@ -1,0 +1,38 @@
+﻿@page "/categories"
+@inject HttpClient Http
+
+<h3>List of Categories</h3>
+
+@if (Categories == null)
+{
+    <p><em>Loading...</em></p>
+}
+else {
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Categories) {
+                var picture = category.Picture.Skip(78).Take(category.Picture.Length - 78).ToArray();
+                <tr>
+                    <td><img class="icon" src=@string.Format("data:image/bmp;base64,{0}", Convert.ToBase64String(picture))></td>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private List<Category> Categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await Http.GetFromJsonAsync<List<Category>>("api/Categories");
+    }
+}

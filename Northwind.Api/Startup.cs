@@ -39,6 +39,13 @@ namespace Northwind.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Northwind.Api", Version = "v1" });
             });
+            services.AddCors(options => {
+                options.AddPolicy(name: "AllowBlazorOrigin",
+                    builder => {
+                        builder.WithOrigins("http://localhost:53555",
+                            "https://localhost:44380");
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +61,8 @@ namespace Northwind.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowBlazorOrigin");
 
             app.UseAuthorization();
 

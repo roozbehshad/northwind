@@ -27,3 +27,4 @@ For ease of finding and quick access to the videos, I have included their links 
 | [REST API Tutorial](https://youtu.be/Wxb3eawo7fo)                                                              | Aug 20, 2021   |
 | [A Patch on the Service Layer](https://youtu.be/gOCqAmbr25s)                                                   | Nov 06, 2021   |
 | [Introduction to Blazor (WebAssembly & Server)](https://youtu.be/q4r2m3mBTBs)                                  | Nov 09, 2021   |
+| [Consume REST API from Blazor WebAssembly](https://youtu.be/DMbPdGf6-rw)                                       | Nov 25, 2021   |
