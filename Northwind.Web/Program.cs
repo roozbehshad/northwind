@@ -14,7 +14,8 @@ namespace Northwind.Web {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44360/") });
+            var apiUrl = builder.Configuration.GetValue<string>("ApiSettings:Url");
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiUrl) });
 
             await builder.Build().RunAsync();
         }

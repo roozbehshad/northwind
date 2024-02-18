@@ -1,0 +1,33 @@
+﻿@attribute [CascadingTypeParameter(nameof(TItem))]
+@typeparam TItem
+
+@if (Items == null)
+{
+    <p><em>Loading...</em></p>
+}
+else {
+    <table class="table">
+        <thead>
+            <tr>
+                @Columns(default(TItem))
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Items) {
+                <CascadingValue Value="item">
+                    <tr>
+                        @Columns(item)
+                    </tr>
+                </CascadingValue>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    public IList<TItem> Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem>? Columns { get; set; }
+}
